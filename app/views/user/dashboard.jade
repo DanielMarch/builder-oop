@@ -1,0 +1,14 @@
+table#userId(data-id=user._id.toString())
+  thead
+    th User
+    th Wood
+    th Cash
+  tbody
+    tr
+      td#user= user.username
+      td#wood= user.wood
+      td#cash= user.cash
+button#plant Plant Seed
+button#getforest Get Forest
+input#woodtrade(type='text', autofocus=true, placeholder='Wood to Trade')
+button#trade Trade
