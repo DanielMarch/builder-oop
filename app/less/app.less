@@ -1,69 +1,86 @@
+body{
+  background-image: url(/img/bg.jpg);
+}
+
 .tree{
   width: 100px;
   height: 100px;
   background-size: cover;
   float: left;
-  margin: 10px;
-  border: 1px solid black;
-}
-
-th, td{
-  border: 1px solid black;
-  padding: 5px;
-}
-
-.cut{
-  margin-top:52px;
-  height: 30px;
-  width: 30px;
-  border: none;
-  background-size: cover;
-  background-image: url(/img/axe.jpg);
-}
-
-.growb{
-  margin-top:52px;
-  height: 30px;
-  width: 30px;
-  border: none;
-  background-size: cover;
-  background-image: url(/img/leaf.jpg);
-}
-
-.heart{
-  margin-top:52px;
-  height: 30px;
-  width: 30px;
-  border: none;
-  background-size: cover;
-  background-color: white;
-  background-image: url(/img/heart.png);
-}
-
-.seed{
-  background-image: url(/img/acorn.png);
-}
-
-.sapling{
-  background-image: url(/img/seedling.jpeg);
-}
-
-.teenager{
-  background-image: url(/img/sappling.jpg);
-}
-
-.adult{
-  background-image: url(/img/tree.gif);
-}
-
-.dead{
-  background-image: url(/img/skull.gif);
-}
-
-.chop{
-  background-image: url(/img/stump.gif);
+  margin: 30px 10px 50px 10px;
 }
 
 .height{
-  color: red;
+  margin-top: -18px;
+  padding-top: 2px;
+  text-align: center;
+  background-color: lightblue;
+  border-radius: 5px;
+}
+
+.cut, .growb{
+  margin-top: 100px;
+  height: 50px;
+  width: 50px;
+  float: left;
+  background-size: cover;
+  background-image: url(/img/cutbutton.png);
+}
+
+#items{
+  float: right;
+}
+
+#autogrow{
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+}
+
+.on{
+  border: 1px solid red;
+}
+
+.cut:hover, .growb:hover{
+  opacity: 0.80;
+}
+
+.cut:active, .growb:active{
+  opacity: 0.50;
+}
+
+.cut{
+  background-image: url(/img/cutbutton.png);
+}
+
+.growb{
+  background-image: url(/img/leafbutton.png);
+}
+
+.seed{
+  background-image: url(/img/seed.png);
+}
+
+.sapling{
+  background-image: url(/img/seedling.png);
+}
+
+.teenager{
+  background-image: url(/img/sapling.png);
+}
+
+.adult{
+  background-image: url(/img/tree.png);
+}
+
+.dead{
+  background-image: url(/img/dead.png);
+}
+
+.chop{
+  background-image: url(/img/stump.png);
+}
+
+.beanstalk{
+  background-image: url(/img/beanstalk.png);
 }

@@ -1,4 +1,11 @@
 /* jshint unused:false */
+var audioChop, audioBeanStalk;
+
+function ajax(url, type, data={}, success=r=>console.log(r), dataType='html'){
+  'use strict';
+  $.ajax({url:url, type:type, data:data, success:success, dataType:dataType});
+}
+
 (function(){
   'use strict';
 
@@ -10,13 +17,24 @@
     $('#dashboard').on('click', '#plant', plant);
     $('#dashboard').on('click', '#getforest', forest);
     $('#dashboard').on('click', '#trade', convert);
+    $('#dashboard').on('click', '#buyAutoGrow', buyAutoGrow);
     $('#forest').on('click', '.growb', grow);
     $('#forest').on('click', '.cut', chop);
-    $('#forest').on('click', '.heart', love);
+    preloadAssets();
   }
 
-  function love(){
-    alert('You have shown your tree love. You feel better, as does your tree');
+  function buyAutoGrow(){
+    var userId = $('#userId').attr('data-id');
+    ajax(`/users/${userId}/purchase/autogrow`, 'put', null, h=>{
+      $('#dashboard').empty().append(h);
+    });
+  }
+
+  function preloadAssets(){
+    audioChop = $('<audio>')[0];
+    audioChop.src = '/audios/chop.mp3';
+    audioBeanStalk = $('<audio>')[0];
+    audioBeanStalk.src = '/audios/beanstalk.mp3';
   }
 
   function convert(){
@@ -30,14 +48,11 @@
   function chop(){
     var tree = $(this).closest('.tree');
     var treeId = tree.attr('data-id');
-    var userId = $('#userId').attr('data-id');
-
     ajax(`/trees/${treeId}/chop`, 'put', null, h=>{
       tree.replaceWith(h);
-      ajax(`/dashboard/${userId}`, 'GET', null, h=>{
-        $('#dashboard').empty().append(h);
-      });
+      dashboard();
     });
+    audioChop.play();
   }
 
   function grow(){
@@ -45,6 +60,9 @@
     var treeId = tree.attr('data-id');
     ajax(`/trees/${treeId}/grow`, 'put', null, h=>{
       tree.replaceWith(h);
+      if($(h).hasClass('beanstalk')){
+        audioBeanStalk.play();
+      }
     });
   }
 
@@ -62,14 +80,17 @@
     });
   }
 
+  function dashboard(){
+    var userId = $('#userId').attr('data-id');
+    ajax(`/dashboard/${userId}`, 'get', null, h=>{
+      $('#dashboard').empty().append(h);
+    });
+  }
+
   function login(){
     var username = $('#username').val();
     ajax('/login', 'post', {username:username}, h =>{
       $('#dashboard').empty().append(h);
     });
-  }
-
-  function ajax(url, type, data={}, success=r=>console.log(r), dataType='html'){
-    $.ajax({url:url, type:type, data:data, success:success, dataType:dataType});
   }
 })();

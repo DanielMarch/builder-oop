@@ -1,7 +1,6 @@
-.tree(data-id=tree._id.toString(), class=tree.getClass())
-  .height= tree.height
+.tree(data-id=tree._id.toString(), class=tree.classes)
+  .height #{(tree.height / 12).toFixed(1)} feet
   .controls
-    if(tree.isHealthy)
-      button.growb
-      button.cut
-      button.heart
+    if(tree.isHealthy && !tree.isBeanStalk)
+      .growb
+      .cut

@@ -2,8 +2,6 @@
 
 var trees = global.nss.db.collection('trees');
 var users = global.nss.db.collection('users');
-// var traceur = require('traceur');
-// var User = traceur.require(__dirname + '/../models/users.js');
 var Mongo = require('mongodb');
 var _ = require('lodash');
 
@@ -20,14 +18,24 @@ class Tree{
   }
 
   grow(){
-    this.height += _.random(0,2);
-    this.isHealthy = _.random(0, 200) !== 69;
+    var x = this.height * 0.10;
+    var y = Math.round(200 - (this.height / 12) * 0.10);
+    y = y < 10 ? 10 : y;
+    console.log(y);
+
+    if(this.height < 48){
+      this.height += _.random(0,2,true);
+      this.isHealthy = _.random(0, 200) !== 69;
+    }else{
+      this.height += _.random(0,x,true);
+      this.isHealthy = _.random(0, y) !== 5;
+    }
   }
 
   chop(){
     if(this.height >= 48){
       var UserId = this.userId;
-      var wood = this.height / 2;
+      var wood = Math.round(this.height / 2);
       users.findOne({_id:UserId},(e,u)=>{
         u.wood += wood;
         users.save(u, (e, count)=>{
@@ -39,7 +47,11 @@ class Tree{
     }
   }
 
-  getClass(){
+  get isBeanStalk(){
+    return (this.height / 12) >= 10000;
+  }
+
+  get classes(){
     var classes = [];
 
     if(this.height === 0){
@@ -61,6 +73,11 @@ class Tree{
     if(this.isChopped){
       classes.push('chop');
     }
+
+    if(this.isBeanStalk){
+      classes.push('beanstalk');
+    }
+
     return classes.join(' ');
   }
 
