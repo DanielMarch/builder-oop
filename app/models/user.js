@@ -38,6 +38,21 @@ class User{
     return (this.cash >= 80000) && (!present);
   }
 
+  get isHouseAvailable(){
+    var present = _(this.items).any(i=>i.type === 'house');
+    return (this.cash >= 100000) && (!present);
+  }
+
+  get isMansionAvailable(){
+    var present = _(this.items).any(i=>i.type === 'mansion');
+    return (this.cash >= 250000) && (!present);
+  }
+
+  get isCastleAvailable(){
+    var present = _(this.items).any(i=>i.type === 'castle');
+    return (this.cash >= 1000000) && (!present);
+  }
+
   static convertWood(a, fn){
     var userId = Mongo.ObjectID(a.userId);
     var wood = a.data;

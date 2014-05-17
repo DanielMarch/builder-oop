@@ -43,9 +43,36 @@ function forest(){
     $('#dashboard').on('click', '#buyAutoGrow', buyAutoGrow);
     $('#dashboard').on('click', '#buyAutoPlant', buyAutoPlant);
     $('#dashboard').on('click', '#buyAutoRoot', buyAutoRoot);
+    $('#dashboard').on('click', '#buyHouse', buyHouse);
+    $('#dashboard').on('click', '#buyMansion', buyMansion);
+    $('#dashboard').on('click', '#buyCastle', buyCastle);
     $('#forest').on('click', '.growb', grow);
     $('#forest').on('click', '.cut', chop);
     preloadAssets();
+  }
+
+  function buyHouse(){
+    var userId = $('#userId').attr('data-id');
+    ajax(`/users/${userId}/purchase/house`, 'put', null, h=>{
+      $('#dashboard').empty().append(h);
+      items();
+    });
+  }
+
+  function buyMansion(){
+    var userId = $('#userId').attr('data-id');
+    ajax(`/users/${userId}/purchase/mansion`, 'put', null, h=>{
+      $('#dashboard').empty().append(h);
+      items();
+    });
+  }
+
+  function buyCastle(){
+    var userId = $('#userId').attr('data-id');
+    ajax(`/users/${userId}/purchase/castle`, 'put', null, h=>{
+      $('#dashboard').empty().append(h);
+      items();
+    });
   }
 
   function buyAutoRoot(){
