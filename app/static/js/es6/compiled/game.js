@@ -15,6 +15,20 @@ function ajax(url, type) {
     dataType: dataType
   });
 }
+function dashboard() {
+  'use strict';
+  var userId = $('#userId').attr('data-id');
+  ajax(("/dashboard/" + userId), 'get', null, (function(h) {
+    $('#dashboard').empty().append(h);
+  }));
+}
+function items() {
+  'use strict';
+  var userId = $('#userId').attr('data-id');
+  ajax(("/items?userId=" + userId), 'get', null, (function(h) {
+    $('#items').empty().append(h);
+  }));
+}
 (function() {
   'use strict';
   $(document).ready(init);
@@ -22,7 +36,6 @@ function ajax(url, type) {
     $('#login').click(login);
     $('#plant').click(plant);
     $('#dashboard').on('click', '#plant', plant);
-    $('#dashboard').on('click', '#getforest', forest);
     $('#dashboard').on('click', '#trade', convert);
     $('#dashboard').on('click', '#buyAutoGrow', buyAutoGrow);
     $('#forest').on('click', '.growb', grow);
@@ -33,6 +46,7 @@ function ajax(url, type) {
     var userId = $('#userId').attr('data-id');
     ajax(("/users/" + userId + "/purchase/autogrow"), 'put', null, (function(h) {
       $('#dashboard').empty().append(h);
+      items();
     }));
   }
   function preloadAssets() {
@@ -82,16 +96,12 @@ function ajax(url, type) {
       $('#forest').append(h);
     }));
   }
-  function dashboard() {
-    var userId = $('#userId').attr('data-id');
-    ajax(("/dashboard/" + userId), 'get', null, (function(h) {
-      $('#dashboard').empty().append(h);
-    }));
-  }
   function login() {
     var username = $('#username').val();
     ajax('/login', 'post', {username: username}, (function(h) {
       $('#dashboard').empty().append(h);
+      forest();
+      items();
     }));
   }
 })();

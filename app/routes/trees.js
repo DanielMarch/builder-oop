@@ -26,9 +26,9 @@ exports.grow = (req, res)=>{
 
 exports.chop = (req, res)=>{
   Tree.findByTreeId(req.params.treeId, tree=>{
-      tree.chop();
-      tree.save(()=>{
-        res.render('trees/tree', {tree:tree});
-      });
+    tree.chop();
+    tree.save(()=>{
+      res.render('trees/tree', {tree:tree});
+    });
   });
 };

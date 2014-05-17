@@ -17,9 +17,15 @@ exports.dashboard = (req, res)=>{
   });
 };
 
+exports.items = (req, res)=>{
+  var userId = req.query.userId;
+  User.findUser(userId, (user)=>{
+    res.render('user/items', {user:user});
+  });
+};
+
 exports.convert = (req, res)=>{
   User.convertWood(req.body, user=>{
-    console.log(user);
     res.render('user/dashboard', {user:user});
   });
 };

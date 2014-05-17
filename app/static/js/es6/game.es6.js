@@ -6,6 +6,22 @@ function ajax(url, type, data={}, success=r=>console.log(r), dataType='html'){
   $.ajax({url:url, type:type, data:data, success:success, dataType:dataType});
 }
 
+function dashboard(){
+  'use strict';
+  var userId = $('#userId').attr('data-id');
+  ajax(`/dashboard/${userId}`, 'get', null, h=>{
+    $('#dashboard').empty().append(h);
+  });
+}
+
+function items(){
+  'use strict';
+  var userId = $('#userId').attr('data-id');
+  ajax(`/items?userId=${userId}`, 'get', null, h =>{
+    $('#items').empty().append(h);
+  });
+}
+
 (function(){
   'use strict';
 
@@ -15,7 +31,6 @@ function ajax(url, type, data={}, success=r=>console.log(r), dataType='html'){
     $('#login').click(login);
     $('#plant').click(plant);
     $('#dashboard').on('click', '#plant', plant);
-    $('#dashboard').on('click', '#getforest', forest);
     $('#dashboard').on('click', '#trade', convert);
     $('#dashboard').on('click', '#buyAutoGrow', buyAutoGrow);
     $('#forest').on('click', '.growb', grow);
@@ -27,6 +42,7 @@ function ajax(url, type, data={}, success=r=>console.log(r), dataType='html'){
     var userId = $('#userId').attr('data-id');
     ajax(`/users/${userId}/purchase/autogrow`, 'put', null, h=>{
       $('#dashboard').empty().append(h);
+      items();
     });
   }
 
@@ -80,17 +96,12 @@ function ajax(url, type, data={}, success=r=>console.log(r), dataType='html'){
     });
   }
 
-  function dashboard(){
-    var userId = $('#userId').attr('data-id');
-    ajax(`/dashboard/${userId}`, 'get', null, h=>{
-      $('#dashboard').empty().append(h);
-    });
-  }
-
   function login(){
     var username = $('#username').val();
     ajax('/login', 'post', {username:username}, h =>{
       $('#dashboard').empty().append(h);
+      forest();
+      items();
     });
   }
 })();

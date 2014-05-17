@@ -1,5 +1,5 @@
 .tree(data-id=tree._id.toString(), class=tree.classes)
-  .height #{(tree.height / 12).toFixed(1)} feet
+  .height #{(tree.height / 12).toFixed(0)}
   .controls
     if(tree.isHealthy && !tree.isBeanStalk)
       .growb

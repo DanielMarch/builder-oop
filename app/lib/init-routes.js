@@ -24,6 +24,7 @@ function load(app, fn){
   app.post('/login', dbg, users.login);
   app.get('/dashboard/:userId', dbg, users.dashboard);
   app.get('/trees', dbg, trees.forest);
+  app.get('/items', dbg, users.items);
   app.post('/trees/plant', dbg, trees.plant);
   app.put('/trees/:treeId/grow', dbg, trees.grow);
   app.put('/trees/:treeId/chop', dbg, trees.chop);
