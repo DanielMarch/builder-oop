@@ -1,7 +1,11 @@
 #items(data-id=user._id.toString())
   each item in user.items
     case item.type
-     when 'autogrow'
-       include ../items/autogrow
-       #slider
-         #readout
+      when 'autogrow'
+        include ../items/autogrow
+        #slider
+          #readout
+      when 'autoplant'
+        include ../items/autoplant
+      when 'autoroot'
+        include ../items/autoroot

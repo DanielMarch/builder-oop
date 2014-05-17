@@ -33,14 +33,32 @@ function items(){
     $('#dashboard').on('click', '#plant', plant);
     $('#dashboard').on('click', '#trade', convert);
     $('#dashboard').on('click', '#buyAutoGrow', buyAutoGrow);
+    $('#dashboard').on('click', '#buyAutoPlant', buyAutoPlant);
+    $('#dashboard').on('click', '#buyAutoRoot', buyAutoRoot);
     $('#forest').on('click', '.growb', grow);
     $('#forest').on('click', '.cut', chop);
     preloadAssets();
   }
 
+  function buyAutoRoot(){
+    var userId = $('#userId').attr('data-id');
+    ajax(`/users/${userId}/purchase/autoroot`, 'put', null, h=>{
+      $('#dashboard').empty().append(h);
+      items();
+    });
+  }
+
   function buyAutoGrow(){
     var userId = $('#userId').attr('data-id');
     ajax(`/users/${userId}/purchase/autogrow`, 'put', null, h=>{
+      $('#dashboard').empty().append(h);
+      items();
+    });
+  }
+
+  function buyAutoPlant(){
+    var userId = $('#userId').attr('data-id');
+    ajax(`/users/${userId}/purchase/autoplant`, 'put', null, h=>{
       $('#dashboard').empty().append(h);
       items();
     });

@@ -25,14 +25,14 @@
           'max': 10000
         },
         serialization: {
-		      lower: [
-			    $.Link({target: $('#readout')})
-		      ],
+          lower: [
+            $.Link({target: $('#readout')})
+          ],
           format: {
-  			    decimals: 0,
-  			    mark: ','
-  		    }
-	      }
+            decimals: 0,
+            mark: ','
+          }
+        }
       });
     }else{
       clearInterval(timer);

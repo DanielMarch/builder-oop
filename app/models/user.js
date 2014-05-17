@@ -28,6 +28,16 @@ class User{
     return (this.cash >= 50000) && (!present);
   }
 
+  get isAutoPlantAvailable(){
+    var present = _(this.items).any(i=>i.type === 'autoplant'); //lodash checks whether autogrow is present within the this.items array
+    return (this.cash >= 75000) && (!present);
+  }
+
+  get isAutoRootAvailable(){
+    var present = _(this.items).any(i=>i.type === 'autoroot'); //lodash checks whether autogrow is present within the this.items array
+    return (this.cash >= 80000) && (!present);
+  }
+
   static convertWood(a, fn){
     var userId = Mongo.ObjectID(a.userId);
     var wood = a.data;
