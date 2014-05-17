@@ -32,3 +32,10 @@ exports.chop = (req, res)=>{
     });
   });
 };
+
+exports.purge = (req, res)=>{
+  Tree.findByTreeId(req.params.treeId, tree=>{
+    tree.purge(()=>{
+    });
+  });
+};

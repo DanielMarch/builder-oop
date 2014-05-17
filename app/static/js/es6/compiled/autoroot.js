@@ -20,7 +20,12 @@
     timer = setInterval(rooting, 1000);
   }
   function rooting() {
-    console.log('root');
+    $('.dead').map((function(i, d) {
+      return $(d).attr('data-id');
+    })).each((function(i, v) {
+      ajax(("/trees/" + v + "/purge"), 'put', null, null);
+      forest();
+    }));
   }
 })();
 

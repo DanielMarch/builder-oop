@@ -17,11 +17,14 @@ class Tree{
     trees.save(this, ()=>fn());
   }
 
+  purge(fn){
+    trees.findAndRemove(this, ()=>fn());
+  }
+
   grow(){
     var x = this.height * 0.10;
     var y = Math.round(200 - (this.height / 12) * 0.10);
     y = y < 10 ? 10 : y;
-    console.log(y);
 
     if(this.height < 48){
       this.height += _.random(0,2,true);

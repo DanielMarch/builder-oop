@@ -28,6 +28,7 @@ function load(app, fn){
   app.post('/trees/plant', dbg, trees.plant);
   app.put('/trees/:treeId/grow', dbg, trees.grow);
   app.put('/trees/:treeId/chop', dbg, trees.chop);
+  app.put('/trees/:treeId/purge', dbg, trees.purge);
   app.post('/convert', dbg, users.convert);
   app.put('/users/:userId/purchase/:item', dbg, users.purchase);
   console.log('Routes Loaded');

@@ -29,6 +29,13 @@ function items() {
     $('#items').empty().append(h);
   }));
 }
+function forest() {
+  'use strict';
+  var userId = $('#userId').attr('data-id');
+  ajax(("/trees?userId=" + userId), 'get', null, (function(h) {
+    $('#forest').empty().append(h);
+  }));
+}
 (function() {
   'use strict';
   $(document).ready(init);
@@ -98,12 +105,6 @@ function items() {
       if ($(h).hasClass('beanstalk')) {
         audioBeanStalk.play();
       }
-    }));
-  }
-  function forest() {
-    var userId = $('#userId').attr('data-id');
-    ajax(("/trees?userId=" + userId), 'get', null, (function(h) {
-      $('#forest').empty().append(h);
     }));
   }
   function plant() {

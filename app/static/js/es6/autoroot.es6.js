@@ -1,3 +1,5 @@
+/* global ajax, forest */
+
 (function(){
   'use strict';
 
@@ -27,6 +29,9 @@
   }
 
   function rooting(){
-    console.log('root');
+    $('.dead').map((i,d)=>$(d).attr('data-id')).each((i,v)=>{
+      ajax(`/trees/${v}/purge`, 'put', null, null);
+      forest();
+    });
   }
 })();

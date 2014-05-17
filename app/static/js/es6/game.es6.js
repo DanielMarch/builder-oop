@@ -22,6 +22,14 @@ function items(){
   });
 }
 
+function forest(){
+  'use strict';
+  var userId = $('#userId').attr('data-id');
+  ajax(`/trees?userId=${userId}`, 'get', null, h =>{
+    $('#forest').empty().append(h);
+  });
+}
+
 (function(){
   'use strict';
 
@@ -97,13 +105,6 @@ function items(){
       if($(h).hasClass('beanstalk')){
         audioBeanStalk.play();
       }
-    });
-  }
-
-  function forest(){
-    var userId = $('#userId').attr('data-id');
-    ajax(`/trees?userId=${userId}`, 'get', null, h =>{
-      $('#forest').empty().append(h);
     });
   }
 
