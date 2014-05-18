@@ -18,7 +18,7 @@ class Tree{
   }
 
   purge(fn){
-    trees.findAndRemove(this, ()=>fn());
+    trees.remove(this, ()=>fn());
   }
 
   grow(){
